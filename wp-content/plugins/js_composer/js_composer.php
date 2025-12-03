@@ -217,13 +217,14 @@ class Vc_Manager {
 	/**
 	 * Serialization disabled
 	 */
-	private function __sleep() {
+	public function __sleep() {
+		return array();
 	}
 
 	/**
 	 * De-serialization disabled
 	 */
-	private function __wakeup() {
+	public function __wakeup() {
 	}
 
 	/**

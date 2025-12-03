@@ -9,6 +9,18 @@
 </head>
 <body <?php body_class(); ?> itemscope="itemscope" itemtype="http://schema.org/WebPage">
 <div id="page" class="site">
-	<?php alone_header_mobile_menu(); ?>
-	<?php alone_header(); ?>
+	<?php
+	// Fallback: ensure helper functions are available even if theme init failed earlier.
+	if ( ! function_exists( 'alone_header_mobile_menu' ) && file_exists( get_template_directory() . '/theme-includes/helpers.php' ) ) {
+		include_once get_template_directory() . '/theme-includes/helpers.php';
+	}
+
+	if ( function_exists( 'alone_header_mobile_menu' ) ) {
+		alone_header_mobile_menu();
+	}
+
+	if ( function_exists( 'alone_header' ) ) {
+		alone_header();
+	}
+	?>
 	<div id="main" class="site-main">

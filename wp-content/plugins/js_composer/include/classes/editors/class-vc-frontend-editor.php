@@ -641,7 +641,9 @@ class Vc_Frontend_Editor implements Vc_Editor_Interface {
 		$protocol = substr( $sp, 0, strpos( $sp, '/' ) ) . ( ( $ssl ) ? 's' : '' );
 		$port = $s['SERVER_PORT'];
 		$port = ( ( ! $ssl && '80' === $port ) || ( $ssl && '443' === $port ) ) ? '' : ':' . $port;
-		$host = isset( $s['HTTP_X_FORWARDED_HOST'] ) ? $s['HTTP_X_FORWARDED_HOST'] : isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : $s['SERVER_NAME'];
+		$host = isset( $s['HTTP_X_FORWARDED_HOST'] )
+			? $s['HTTP_X_FORWARDED_HOST']
+			: ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : $s['SERVER_NAME'] );
 
 		return $protocol . '://' . $host . $port . $s['REQUEST_URI'];
 	}
@@ -942,4 +944,3 @@ if ( ! function_exists( 'vc_container_anchor' ) ) {
 		return '<span class="vc_container-anchor" style="display: none;"></span>';
 	}
 }
-
